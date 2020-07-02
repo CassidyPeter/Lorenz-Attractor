@@ -11,7 +11,7 @@ lorenz = @(t,state) [(Sigma*state(2) - Sigma*state(1)) ; (state(1)*Rho - state(1
 %ODE solver
 [t,state] = ode45(lorenz, t, state);
 
-%Plotting/tracing
+%Plotting
 f=figure('Position', [100 100 900 600]);
 plot3(state(:,1), state(:,2), state(:,3), 'c')
 set(gca, 'Color', 'k')
@@ -20,6 +20,15 @@ ylabel('y');
 zlabel('z');
 title('Lorenz attractor');
 
+%UI Slider
+sldSigma = uicontrol('Parent', f, 'Style', 'slider', 'Position', [90 75 120 3], 'value', Sigma, 'min', -10, 'max', 30);
+labelSigma = uicontrol('Parent', f, 'Style', 'text', 'Position', [132, 37, 35, 20], 'String', 'Sigma');
+sldBeta = uicontrol('Parent', f, 'Style', 'slider', 'Position', [390 75 120 3], 'value', Beta, 'min', 1, 'max', 4);
+labelBeta = uicontrol('Parent', f, 'Style', 'text', 'Position', [435, 37, 35, 20], 'String', 'Beta');
+sldRho = uicontrol('Parent', f, 'Style', 'slider', 'Position', [690 75 120 3], 'value', Rho, 'min', 13, 'max', 43);
+labelRho = uicontrol('Parent', f, 'Style', 'text', 'Position', [735, 37, 35, 20], 'String', 'Rho');
+
+%Tracing
 hold on
 p = plot3(state(1,1), state(1,2), state(1,3), 'o', 'MarkerFaceColor', 'red');
 hold off
